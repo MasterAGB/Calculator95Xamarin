@@ -1,0 +1,152 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileXamarin.Views.CalculatorPage"
+             Title="Calculator">
+    
+    <!-- Trying to make buttons retro windows 95 windows looking, sadly no Bevels in xamarin -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="MainEntryStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="55"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <Grid>
+        <!-- Row Definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <!-- Main Content -->
+        <Grid Grid.Row="0">
+            <!-- Row Definitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Display Area -->
+            <StackLayout Grid.Row="0" Orientation="Vertical">
+                <Label Style="{StaticResource LabelStyle}" Text="{Binding PrevNumberVisualText}" x:Name="prevNumberVisual"
+                       HorizontalOptions="End" />
+                <Entry Style="{StaticResource MainEntryStyle}" Text="{Binding MainInputText}" x:Name="mainInput"
+                       IsReadOnly="True" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" />
+            </StackLayout>
+
+
+            <!-- Buttons Grid -->
+            <Grid Grid.Row="1">
+                <!-- Row and Column Definitions -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Buttons -->
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="Backspace" Text="←" Grid.Row="0" Grid.Column="0"
+                        Command="{Binding KeyPressCommand}" CommandParameter="Backspace" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="ClearEntryButton" Text="CE" Grid.Row="0" Grid.Column="1"
+                        Clicked="ClearAllButton_Clicked" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="ClearButton" Text="C" Grid.Row="0" Grid.Column="2"
+                        Clicked="ClearEntryButton_Clicked" />
+
+
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="PlusMinusButton" Text="±" Grid.Row="0" Grid.Column="3"
+                        Command="{Binding KeyPressCommand}" CommandParameter="Flip" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="SqrtButton" Text="√" Grid.Row="0" Grid.Column="4"
+                        Command="{Binding KeyPressCommand}" CommandParameter="@" />
+
+
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="Digit7Button" Text="7" Grid.Row="1" Grid.Column="0"
+                        Command="{Binding KeyPressCommand}" CommandParameter="7" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="Digit8Button" Text="8" Grid.Row="1" Grid.Column="1"
+                        Command="{Binding KeyPressCommand}" CommandParameter="8" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="Digit9Button" Text="9" Grid.Row="1" Grid.Column="2"
+                        Command="{Binding KeyPressCommand}" CommandParameter="9" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="DivButton" Text="/" Grid.Row="1" Grid.Column="3"
+                        Command="{Binding KeyPressCommand}" CommandParameter="/" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="PercentButton" Text="%" Grid.Row="1" Grid.Column="4"
+                        Command="{Binding KeyPressCommand}" CommandParameter="%" />
+
+
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="Digit4Button" Text="4" Grid.Row="2" Grid.Column="0"
+                        Command="{Binding KeyPressCommand}" CommandParameter="4" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="Digit5Button" Text="5" Grid.Row="2" Grid.Column="1"
+                        Command="{Binding KeyPressCommand}" CommandParameter="5" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="Digit6Button" Text="6" Grid.Row="2" Grid.Column="2"
+                        Command="{Binding KeyPressCommand}" CommandParameter="6" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="MultButton" Text="*" Grid.Row="2" Grid.Column="3"
+                        Command="{Binding KeyPressCommand}" CommandParameter="*" />
+                <Button  Style="{StaticResource ButtonStyle}"
+                        x:Name="FractionButton" Text="1/x" Grid.Row="2" Grid.Column="4"
+                        Command="{Binding KeyPressCommand}" CommandParameter="Fraction" />
+
+
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="Digit1Button" Text="1" Grid.Row="3" Grid.Column="0"
+                        Command="{Binding KeyPressCommand}" CommandParameter="1" />
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="Digit2Button" Text="2" Grid.Row="3" Grid.Column="1"
+                        Command="{Binding KeyPressCommand}" CommandParameter="2" />
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="Digit3Button" Text="3" Grid.Row="3" Grid.Column="2"
+                        Command="{Binding KeyPressCommand}" CommandParameter="3" />
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="MinusButton" Text="-" Grid.Row="3" Grid.Column="3"
+                        Command="{Binding KeyPressCommand}" CommandParameter="-" />
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="ResultButton" Text="=" Grid.Row="3" Grid.Column="4"
+                        Grid.RowSpan="2" Command="{Binding KeyPressCommand}" CommandParameter="=" />
+
+
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="Digit0Button" Text="0" Grid.Row="4" Grid.Column="0"
+                        Grid.ColumnSpan="2" Command="{Binding KeyPressCommand}" CommandParameter="0" />
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="PlusButton" Text="+" Grid.Row="4" Grid.Column="3"
+                        Command="{Binding KeyPressCommand}" CommandParameter="+" />
+                <Button  Style="{StaticResource ButtonStyle}"                        x:Name="ComaButton" Text="." Grid.Row="4" Grid.Column="2"
+                        Command="{Binding KeyPressCommand}" CommandParameter="." />
+
+
+            </Grid>
+
+
+        </Grid>
+
+
+    </Grid>
+</ContentPage>
